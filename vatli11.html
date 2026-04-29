@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ôn Tập Vật Lí 11 — Học Kỳ II</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+<style>
+:root {
+  --paper: #f5efe2;
+  --paper-dark: #e8dfc9;
+  --ink: #1a1410;
+  --ink-soft: #4a3f33;
+  --accent: #c8431f;
+  --accent-soft: #e07a4f;
+  --gold: #b8893b;
+  --green: #4a6b3a;
+  --blue: #2c5070;
+  --line: #c4b896;
+  --highlight: #fff3a8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(200, 67, 31, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(184, 137, 59, 0.05) 0%, transparent 50%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 31px,
+      rgba(196, 184, 150, 0.15) 31px,
+      rgba(196, 184, 150, 0.15) 32px
+    );
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 2rem 1.5rem;
+  border-bottom: 4px double var(--gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '⚡';
+  position: absolute;
+  font-size: 12rem;
+  right: -1rem;
+  top: -2rem;
+  opacity: 0.06;
+  transform: rotate(-15deg);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--accent-soft);
+  font-weight: 400;
+}
+
+.subtitle {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--paper-dark);
+  margin-top: 0.75rem;
+}
+
+/* ===== NAVIGATION TABS ===== */
+.nav-tabs {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--line);
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  padding: 0.85rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-btn:hover { color: var(--accent); }
+
+.tab-btn.active {
+  color: var(--accent);
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent);
+}
+
+.tab-icon {
+  font-size: 1.2rem;
+}
+
+/* ===== MAIN CONTENT ===== */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== THEORY SECTION ===== */
+.chapter {
+  background: rgba(255, 252, 244, 0.6);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  box-shadow: 2px 4px 0 rgba(26, 20, 16, 0.06);
+}
+
+.chapter-header {
+  padding: 1.5rem;
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.chapter-header:hover { background: #2a221b; }
+
+.chapter-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chapter-num {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--accent);
+  color: white;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.chapter-toggle {
+  font-size: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.chapter.open .chapter-toggle { transform: rotate(45deg); }
+
+.chapter-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.chapter.open .chapter-body { max-height: 10000px; }
+
+.chapter-body-inner { padding: 2rem 1.5rem; }
+
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--accent);
+  margin: 1.5rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px dashed var(--line);
+}
+
+.section-title:first-child { margin-top: 0; }
+
+.formula-card {
+  background: linear-gradient(135deg, #fef9e7 0%, #fff3a8 100%);
+  border-left: 4px solid var(--gold);
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  border-radius: 0 4px 4px 0;
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+}
+
+.note-box {
+  background: rgba(74, 107, 58, 0.08);
+  border: 1px solid var(--green);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.note-box::before {
+  content: '💡';
+  position: absolute;
+  left: 0.75rem;
+  top: 0.85rem;
+  font-size: 1.3rem;
+}
+
+.warning-box {
+  background: rgba(200, 67, 31, 0.06);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+  padding-left: 3rem;
+  position: relative;
+}
+
+.warning-box::before {
+  content: '⚠️';
+  position: absolute;
+  left: 0.75rem;
+  top: 0.85rem;
+  font-size: 1.3rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: white;
+  font-size: 0.92rem;
+}
+
+th, td {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+th {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+  font-family: 'Fraunces', serif;
+}
+
+tr:nth-child(even) td { background: rgba(196, 184, 150, 0.08); }
+
+ul, ol { padding-left: 1.5rem; margin: 0.5rem 0; }
+li { margin-bottom: 0.4rem; }
+
+p { margin-bottom: 0.75rem; }
+
+/* ===== FLASHCARD SECTION ===== */
+.flashcard-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.fc-progress {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.fc-progress strong {
+  color: var(--accent);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.fc-filter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.fc-filter-btn {
+  background: white;
+  border: 1.5px solid var(--line);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.fc-filter-btn:hover { border-color: var(--accent); }
+
+.fc-filter-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.flashcard-stage {
+  perspective: 2000px;
+  margin: 0 auto 2rem;
+  max-width: 700px;
+  height: 380px;
+}
+
+.flashcard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.flashcard.flipped { transform: rotateY(180deg); }
+
+.fc-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 8px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(26, 20, 16, 0.15), 0 2px 8px rgba(26, 20, 16, 0.1);
+  border: 1px solid var(--line);
+}
+
+.fc-front {
+  background: linear-gradient(135deg, #fefcf6 0%, #f5efe2 100%);
+}
+
+.fc-back {
+  background: linear-gradient(135deg, #1a1410 0%, #2a221b 100%);
+  color: var(--paper);
+  transform: rotateY(180deg);
+}
+
+.fc-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.fc-back .fc-label { color: var(--gold); }
+
+.fc-question {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  max-width: 100%;
+}
+
+.fc-answer {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  max-width: 100%;
+  overflow-y: auto;
+  max-height: 250px;
+}
+
+.fc-hint {
+  position: absolute;
+  bottom: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  opacity: 0.5;
+  letter-spacing: 0.15em;
+}
+
+.fc-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.fc-btn {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 0.85rem 1.5rem;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fc-btn:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.fc-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.fc-btn.secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+
+.fc-btn.secondary:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ===== QUIZ SECTION ===== */
+.quiz-intro {
+  text-align: center;
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  margin-bottom: 2rem;
+}
+
+.quiz-intro h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-intro p {
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+}
+
+.quiz-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-mode-card {
+  background: var(--paper);
+  border: 2px solid var(--line);
+  padding: 1.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.quiz-mode-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(200, 67, 31, 0.15);
+}
+
+.quiz-mode-card.active {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, #fef9e7 0%, #fff3a8 100%);
+}
+
+.quiz-mode-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+.quiz-mode-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.quiz-mode-desc {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.quiz-start-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+
+.quiz-start-btn:hover {
+  background: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(26, 20, 16, 0.3);
+}
+
+.quiz-question-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 2px 4px 0 rgba(26, 20, 16, 0.06);
+}
+
+.quiz-progress-bar {
+  height: 6px;
+  background: var(--paper-dark);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.quiz-question-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.quiz-option {
+  background: var(--paper);
+  border: 2px solid var(--line);
+  padding: 0.95rem 1.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  text-align: left;
+  transition: all 0.15s;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  line-height: 1.5;
+}
+
+.quiz-option:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: white;
+  transform: translateX(4px);
+}
+
+.quiz-option-letter {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  background: var(--ink);
+  color: var(--paper);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+.quiz-option.correct {
+  background: rgba(74, 107, 58, 0.15);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.quiz-option.correct .quiz-option-letter {
+  background: var(--green);
+}
+
+.quiz-option.incorrect {
+  background: rgba(200, 67, 31, 0.1);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.quiz-option.incorrect .quiz-option-letter {
+  background: var(--accent);
+}
+
+.quiz-feedback {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  display: none;
+}
+
+.quiz-feedback.show { display: block; animation: fadeIn 0.3s; }
+
+.quiz-feedback.right {
+  background: rgba(74, 107, 58, 0.1);
+  border-left: 4px solid var(--green);
+}
+
+.quiz-feedback.wrong {
+  background: rgba(200, 67, 31, 0.08);
+  border-left: 4px solid var(--accent);
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.quiz-results {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.quiz-score {
+  font-family: 'Fraunces', serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  margin: 1rem 0;
+}
+
+.quiz-score-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
+}
+
+.quiz-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.quiz-stat {
+  background: var(--paper);
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+
+.quiz-stat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.quiz-stat-label {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* ===== EXERCISES SECTION ===== */
+.exercise-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 2px 4px 0 rgba(26, 20, 16, 0.06);
+}
+
+.exercise-num {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--accent);
+  color: white;
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.exercise-question {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.exercise-toggle {
+  background: transparent;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  padding: 0.5rem 1.2rem;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.exercise-toggle:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.exercise-solution {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--paper);
+  border-left: 4px solid var(--green);
+  border-radius: 0 4px 4px 0;
+}
+
+.exercise-solution.show { display: block; animation: fadeIn 0.3s; }
+
+.exercise-solution h4 {
+  font-family: 'Fraunces', serif;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .header { padding: 1.5rem 1rem; }
+  .main { padding: 1.5rem 1rem; }
+  .nav-tabs { padding: 0 1rem; gap: 0; }
+  .tab-btn { padding: 0.75rem 0.85rem; font-size: 0.85rem; }
+  .tab-btn span:not(.tab-icon) { display: none; }
+  .flashcard-stage { height: 320px; }
+  .fc-face { padding: 1.5rem; }
+  .fc-question { font-size: 1.2rem; }
+  .fc-answer { font-size: 1.1rem; }
+  .chapter-body-inner { padding: 1.25rem 1rem; }
+  .chapter-title { font-size: 1.1rem; }
+  table { font-size: 0.8rem; }
+  th, td { padding: 0.5rem 0.4rem; }
+  .quiz-question-card { padding: 1.25rem; }
+  .quiz-question-text { font-size: 1.05rem; }
+  .quiz-actions { flex-direction: column; }
+  .quiz-actions .fc-btn { width: 100%; justify-content: center; }
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.1em;
+  border-top: 2px solid var(--line);
+  margin-top: 3rem;
+}
+
+.footer-divider {
+  color: var(--gold);
+  margin: 0 0.5rem;
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-content">
+    <div class="eyebrow">Đề cương ôn tập • Khối 11</div>
+    <h1 class="title">Vật Lí 11 <em>— Học Kỳ II</em></h1>
+    <p class="subtitle">Điện trường · Tụ điện · Dòng điện không đổi · Mạch điện</p>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <button class="tab-btn active" data-tab="theory"><span class="tab-icon">📖</span><span>Lý thuyết</span></button>
+  <button class="tab-btn" data-tab="flashcards"><span class="tab-icon">🃏</span><span>Flashcard</span></button>
+  <button class="tab-btn" data-tab="quiz"><span class="tab-icon">✍️</span><span>Quiz</span></button>
+  <button class="tab-btn" data-tab="exercises"><span class="tab-icon">🧮</span><span>Bài tập</span></button>
+</nav>
+
+<main class="main">
+
+<!-- ===== THEORY TAB ===== -->
+<section class="tab-content active" id="theory">
+
+  <div class="chapter open" data-chapter="1">
+    <div class="chapter-header">
+      <div class="chapter-title"><span class="chapter-num">CHƯƠNG 1</span> Điện Trường</div>
+      <span class="chapter-toggle">+</span>
+    </div>
+    <div class="chapter-body"><div class="chapter-body-inner">
+
+      <h3 class="section-title">1. Định luật Coulomb</h3>
+      <p>Lực tương tác tĩnh điện giữa hai điện tích điểm trong chân không:</p>
+      <div class="formula-card">$$F = k\frac{|q_1 q_2|}{r^2}$$</div>
+      <ul>
+        <li>$k = 9 \times 10^9 \, \text{N.m}^2/\text{C}^2$ (hằng số Coulomb)</li>
+        <li>$q_1, q_2$: điện tích (C); $r$: khoảng cách (m)</li>
+      </ul>
+      <div class="note-box">Lực tỉ lệ <strong>nghịch với bình phương khoảng cách</strong> giữa hai điện tích.</div>
+
+      <h3 class="section-title">2. Cường độ điện trường</h3>
+      <p>Do điện tích điểm Q gây ra tại điểm cách Q một khoảng $r$:</p>
+      <div class="formula-card">$$E = k\frac{|Q|}{r^2}$$</div>
+      <p>Giữa hai bản kim loại phẳng song song:</p>
+      <div class="formula-card">$$E = \frac{U}{d}$$</div>
+      <p>Đơn vị: V/m. Điện trường <strong>truyền tương tác</strong> giữa các điện tích.</p>
+
+      <h3 class="section-title">3. Điện thế — Hiệu điện thế</h3>
+      <table>
+        <tr><th>Đại lượng</th><th>Ký hiệu</th><th>Đơn vị</th></tr>
+        <tr><td>Điện thế</td><td>V</td><td>Vôn (V)</td></tr>
+        <tr><td>Hiệu điện thế</td><td>$U_{MN} = V_M - V_N$</td><td>Vôn (V)</td></tr>
+      </table>
+      <p><strong>Công thức quan trọng:</strong></p>
+      <div class="formula-card">$$A = qU \Leftrightarrow U = \frac{A}{q}$$</div>
+      <div class="formula-card">$$E = \frac{V_M - V_N}{MN} = \frac{U_{MN}}{d}$$</div>
+      <div class="warning-box">Công của lực điện <strong>không phụ thuộc</strong> vào hình dạng đường đi, chỉ phụ thuộc vào điểm đầu và điểm cuối.</div>
+
+    </div></div>
+  </div>
+
+  <div class="chapter" data-chapter="2">
+    <div class="chapter-header">
+      <div class="chapter-title"><span class="chapter-num">CHƯƠNG 2</span> Tụ Điện</div>
+      <span class="chapter-toggle">+</span>
+    </div>
+    <div class="chapter-body"><div class="chapter-body-inner">
+
+      <h3 class="section-title">1. Định nghĩa</h3>
+      <p>Tụ điện là hệ gồm <strong>hai vật dẫn đặt gần nhau</strong>, ngăn cách nhau bằng một <strong>lớp cách điện</strong> (điện môi).</p>
+
+      <h3 class="section-title">2. Điện dung</h3>
+      <div class="formula-card">$$C = \frac{Q}{U}$$</div>
+      <ul>
+        <li>C: điện dung — đơn vị Fara (F)</li>
+        <li>Q: điện tích trên tụ (C); U: hiệu điện thế (V)</li>
+      </ul>
+
+      <h3 class="section-title">3. Năng lượng tụ điện</h3>
+      <div class="formula-card">$$W = \frac{1}{2}CU^2 = \frac{Q^2}{2C} = \frac{1}{2}QU$$</div>
+
+      <h3 class="section-title">4. Ghép tụ điện</h3>
+      <table>
+        <tr><th>Cách ghép</th><th>Điện dung bộ</th><th>Điện tích</th><th>Hiệu điện thế</th></tr>
+        <tr>
+          <td><strong>Nối tiếp</strong></td>
+          <td>$\frac{1}{C_b} = \frac{1}{C_1} + \frac{1}{C_2}$</td>
+          <td>$Q_b = Q_1 = Q_2$</td>
+          <td>$U_b = U_1 + U_2$</td>
+        </tr>
+        <tr>
+          <td><strong>Song song</strong></td>
+          <td>$C_b = C_1 + C_2$</td>
+          <td>$Q_b = Q_1 + Q_2$</td>
+          <td>$U_b = U_1 = U_2$</td>
+        </tr>
+      </table>
+      <div class="note-box">Ghép 2 tụ nối tiếp: $C_b = \dfrac{C_1 \cdot C_2}{C_1 + C_2}$</div>
+
+    </div></div>
+  </div>
+
+  <div class="chapter" data-chapter="3">
+    <div class="chapter-header">
+      <div class="chapter-title"><span class="chapter-num">CHƯƠNG 3</span> Dòng Điện Không Đổi</div>
+      <span class="chapter-toggle">+</span>
+    </div>
+    <div class="chapter-body"><div class="chapter-body-inner">
+
+      <h3 class="section-title">1. Cường độ dòng điện</h3>
+      <div class="formula-card">$$I = \frac{\Delta q}{\Delta t}$$</div>
+      <p>Liên hệ với mật độ hạt mang điện:</p>
+      <div class="formula-card">$$I = S \cdot n \cdot v \cdot e$$</div>
+      <ul>
+        <li>S: tiết diện dây dẫn (m²) — Dây tròn: $S = \dfrac{\pi d^2}{4}$</li>
+        <li>n: mật độ electron tự do (hạt/m³)</li>
+        <li>v: tốc độ dịch chuyển có hướng (m/s)</li>
+        <li>$e = 1{,}6 \times 10^{-19}$ C</li>
+      </ul>
+      <div class="note-box">Bản chất dòng điện trong kim loại: dòng chuyển dời có hướng của <strong>các electron</strong>.</div>
+
+      <h3 class="section-title">2. Định luật Ohm cho đoạn mạch</h3>
+      <div class="formula-card">$$I = \frac{U}{R} \quad \Leftrightarrow \quad U = IR$$</div>
+      <p>Đồ thị U-I là đường thẳng đi qua gốc tọa độ.</p>
+
+      <h3 class="section-title">3. Điện trở của dây dẫn</h3>
+      <div class="formula-card">$$R = \rho \frac{l}{S}$$</div>
+      <p>Phụ thuộc nhiệt độ:</p>
+      <div class="formula-card">$$R = R_0[1 + \alpha(t - t_0)]$$</div>
+
+      <h3 class="section-title">4. Ghép điện trở</h3>
+      <table>
+        <tr><th>Cách ghép</th><th>$R_{tđ}$</th><th>I</th><th>U</th></tr>
+        <tr>
+          <td><strong>Nối tiếp</strong></td>
+          <td>$R_1 + R_2$</td>
+          <td>$I = I_1 = I_2$</td>
+          <td>$U = U_1 + U_2$</td>
+        </tr>
+        <tr>
+          <td><strong>Song song</strong></td>
+          <td>$\frac{1}{R_{tđ}} = \frac{1}{R_1} + \frac{1}{R_2}$</td>
+          <td>$I = I_1 + I_2$</td>
+          <td>$U = U_1 = U_2$</td>
+        </tr>
+      </table>
+      <div class="note-box">Ghép 2 điện trở song song: $R_{tđ} = \dfrac{R_1 \cdot R_2}{R_1 + R_2}$</div>
+
+    </div></div>
+  </div>
+
+  <div class="chapter" data-chapter="4">
+    <div class="chapter-header">
+      <div class="chapter-title"><span class="chapter-num">CHƯƠNG 4</span> Nguồn Điện · Mạch Điện Kín</div>
+      <span class="chapter-toggle">+</span>
+    </div>
+    <div class="chapter-body"><div class="chapter-body-inner">
+
+      <h3 class="section-title">1. Suất điện động</h3>
+      <div class="formula-card">$$\mathcal{E} = \frac{A}{q}$$</div>
+      <ul>
+        <li>Đơn vị: Vôn (V)</li>
+        <li>A: công của lực lạ (J)</li>
+        <li>q: điện tích dịch chuyển từ cực âm sang cực dương trong nguồn (C)</li>
+      </ul>
+
+      <h3 class="section-title">2. Định luật Ohm cho toàn mạch</h3>
+      <div class="formula-card">$$I = \frac{\mathcal{E}}{R + r}$$</div>
+      <p>Hiệu điện thế mạch ngoài:</p>
+      <div class="formula-card">$$U_N = \mathcal{E} - I \cdot r = I \cdot R$$</div>
+
+      <h3 class="section-title">3. Ghép nguồn điện giống nhau</h3>
+      <table>
+        <tr><th>Cách ghép (n nguồn)</th><th>$\mathcal{E}_b$</th><th>$r_b$</th></tr>
+        <tr><td><strong>Nối tiếp</strong></td><td>$n\mathcal{E}$</td><td>$nr$</td></tr>
+        <tr><td><strong>Song song</strong></td><td>$\mathcal{E}$</td><td>$r/n$</td></tr>
+      </table>
+
+    </div></div>
+  </div>
+
+  <div class="chapter" data-chapter="5">
+    <div class="chapter-header">
+      <div class="chapter-title"><span class="chapter-num">PHƯƠNG PHÁP</span> Tổng Hợp Điện Trường</div>
+      <span class="chapter-toggle">+</span>
+    </div>
+    <div class="chapter-body"><div class="chapter-body-inner">
+
+      <p>Khi tính $\vec{E}$ tại điểm M do nhiều điện tích gây ra:</p>
+      <ol>
+        <li><strong>Bước 1:</strong> Tính độ lớn $E_1, E_2$ do từng điện tích.</li>
+        <li><strong>Bước 2:</strong> Vẽ vector $\vec{E_1}, \vec{E_2}$ (hướng ra xa điện tích dương, hướng về điện tích âm).</li>
+        <li><strong>Bước 3:</strong> Áp dụng nguyên lý chồng chất: $\vec{E} = \vec{E_1} + \vec{E_2}$</li>
+      </ol>
+
+      <table>
+        <tr><th>Trường hợp</th><th>Công thức</th></tr>
+        <tr><td>$\vec{E_1} \uparrow\uparrow \vec{E_2}$ (cùng chiều)</td><td>$E = E_1 + E_2$</td></tr>
+        <tr><td>$\vec{E_1} \uparrow\downarrow \vec{E_2}$ (ngược chiều)</td><td>$E = |E_1 - E_2|$</td></tr>
+        <tr><td>$\vec{E_1} \perp \vec{E_2}$</td><td>$E = \sqrt{E_1^2 + E_2^2}$</td></tr>
+        <tr><td>Hợp góc $\alpha$</td><td>$E = \sqrt{E_1^2 + E_2^2 + 2E_1 E_2 \cos\alpha}$</td></tr>
+      </table>
+
+      <h3 class="section-title">💡 Mẹo ghi nhớ nhanh</h3>
+      <ul>
+        <li>Điện trường đều giữa 2 bản: $E = U/d$ (nhớ "U trên d")</li>
+        <li>Tụ điện: $Q = CU$ (giống định luật Ohm $U = IR$)</li>
+        <li>Năng lượng tụ: luôn có hệ số <strong>½</strong> phía trước</li>
+        <li>Định luật Ohm toàn mạch: tổng trở = $R + r$ (mạch ngoài + trong)</li>
+        <li>Khi K mở: dòng điện không qua nhánh đó → coi như bỏ nhánh đó</li>
+      </ul>
+
+    </div></div>
+  </div>
+
+</section>
+
+<!-- ===== FLASHCARDS TAB ===== -->
+<section class="tab-content" id="flashcards">
+  <div class="flashcard-controls">
+    <div class="fc-progress">Thẻ <strong id="fc-current">1</strong> / <span id="fc-total">20</span></div>
+    <div class="fc-filter" id="fc-filter">
+      <button class="fc-filter-btn active" data-filter="all">Tất cả</button>
+      <button class="fc-filter-btn" data-filter="ch1">Điện trường</button>
+      <button class="fc-filter-btn" data-filter="ch2">Tụ điện</button>
+      <button class="fc-filter-btn" data-filter="ch3">Dòng điện</button>
+      <button class="fc-filter-btn" data-filter="ch4">Mạch kín</button>
+    </div>
+  </div>
+
+  <div class="flashcard-stage">
+    <div class="flashcard" id="flashcard">
+      <div class="fc-face fc-front">
+        <div class="fc-label">Câu hỏi</div>
+        <div class="fc-question" id="fc-q">Lực Coulomb tính bằng công thức nào?</div>
+        <div class="fc-hint">▸ Nhấn để xem đáp án</div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-label">Đáp án</div>
+        <div class="fc-answer" id="fc-a">$F = k\dfrac{|q_1 q_2|}{r^2}$</div>
+        <div class="fc-hint">▸ Nhấn để quay lại</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-nav">
+    <button class="fc-btn secondary" id="fc-prev">← Trước</button>
+    <button class="fc-btn" id="fc-shuffle">🔀 Trộn</button>
+    <button class="fc-btn secondary" id="fc-next">Sau →</button>
+  </div>
+</section>
+
+<!-- ===== QUIZ TAB ===== -->
+<section class="tab-content" id="quiz">
+  <div id="quiz-intro-screen">
+    <div class="quiz-intro">
+      <h2>Quiz Trắc Nghiệm</h2>
+      <p>Chọn chủ đề muốn luyện tập</p>
+      <div class="quiz-mode-grid" id="quiz-mode-grid">
+        <div class="quiz-mode-card active" data-mode="all">
+          <div class="quiz-mode-icon">📚</div>
+          <div class="quiz-mode-title">Tất cả</div>
+          <div class="quiz-mode-desc">Trộn ngẫu nhiên 15 câu</div>
+        </div>
+        <div class="quiz-mode-card" data-mode="ch1">
+          <div class="quiz-mode-icon">⚡</div>
+          <div class="quiz-mode-title">Điện trường</div>
+          <div class="quiz-mode-desc">Coulomb · Điện thế · Công lực điện</div>
+        </div>
+        <div class="quiz-mode-card" data-mode="ch2">
+          <div class="quiz-mode-icon">🔋</div>
+          <div class="quiz-mode-title">Tụ điện</div>
+          <div class="quiz-mode-desc">Điện dung · Năng lượng · Ghép tụ</div>
+        </div>
+        <div class="quiz-mode-card" data-mode="ch3">
+          <div class="quiz-mode-icon">⚙️</div>
+          <div class="quiz-mode-title">Dòng điện</div>
+          <div class="quiz-mode-desc">Định luật Ohm · Điện trở</div>
+        </div>
+        <div class="quiz-mode-card" data-mode="ch4">
+          <div class="quiz-mode-icon">🔌</div>
+          <div class="quiz-mode-title">Mạch kín</div>
+          <div class="quiz-mode-desc">Suất điện động · Toàn mạch</div>
+        </div>
+      </div>
+      <button class="quiz-start-btn" id="quiz-start">BẮT ĐẦU →</button>
+    </div>
+  </div>
+
+  <div id="quiz-game-screen" style="display:none">
+    <div class="quiz-question-card">
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill"></div></div>
+      <div class="quiz-meta">
+        <span>Câu <strong id="q-num">1</strong>/<span id="q-total">15</span></span>
+        <span>Đúng: <strong id="q-correct">0</strong></span>
+      </div>
+      <div class="quiz-question-text" id="quiz-question-text"></div>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+      <div class="quiz-actions">
+        <button class="fc-btn secondary" id="quiz-quit">Thoát</button>
+        <button class="fc-btn" id="quiz-next" style="display:none">Câu tiếp →</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz-results-screen" style="display:none">
+    <div class="quiz-results">
+      <div class="quiz-score-label">ĐIỂM SỐ</div>
+      <div class="quiz-score" id="quiz-final-score">0/15</div>
+      <div id="quiz-result-message"></div>
+      <div class="quiz-stats">
+        <div class="quiz-stat">
+          <div class="quiz-stat-num" id="stat-correct" style="color:var(--green)">0</div>
+          <div class="quiz-stat-label">Đúng</div>
+        </div>
+        <div class="quiz-stat">
+          <div class="quiz-stat-num" id="stat-wrong" style="color:var(--accent)">0</div>
+          <div class="quiz-stat-label">Sai</div>
+        </div>
+        <div class="quiz-stat">
+          <div class="quiz-stat-num" id="stat-percent" style="color:var(--blue)">0%</div>
+          <div class="quiz-stat-label">Tỉ lệ</div>
+        </div>
+      </div>
+      <button class="quiz-start-btn" id="quiz-restart">LÀM LẠI</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXERCISES TAB ===== -->
+<section class="tab-content" id="exercises">
+  <div id="exercises-list"></div>
+</section>
+
+</main>
+
+<footer class="footer">
+  Vật Lí 11 · Học Kỳ II
+  <span class="footer-divider">✦</span>
+  Học và làm bài thật tốt nhé!
+  <span class="footer-divider">✦</span>
+  Made with ❤
+</footer>
+
+<script>
+// ============== TAB SWITCHING ==============
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.MathJax) MathJax.typesetPromise();
+  });
+});
+
+// ============== CHAPTER ACCORDION ==============
+document.querySelectorAll('.chapter-header').forEach(h => {
+  h.addEventListener('click', () => {
+    h.parentElement.classList.toggle('open');
+  });
+});
+
+// ============== FLASHCARDS DATA ==============
+const flashcards = [
+  // Chapter 1 — Điện trường
+  { ch: 'ch1', q: 'Công thức lực Coulomb giữa hai điện tích điểm?', a: '$$F = k\\dfrac{|q_1 q_2|}{r^2}$$ với $k = 9 \\times 10^9$ N.m²/C²' },
+  { ch: 'ch1', q: 'Lực Coulomb tỉ lệ thế nào với khoảng cách?', a: 'Tỉ lệ <strong>nghịch với bình phương</strong> khoảng cách giữa hai điện tích.' },
+  { ch: 'ch1', q: 'Cường độ điện trường do điện tích điểm Q gây ra?', a: '$$E = k\\dfrac{|Q|}{r^2}$$' },
+  { ch: 'ch1', q: 'Cường độ điện trường giữa hai bản kim loại phẳng?', a: '$$E = \\dfrac{U}{d}$$ <br>U: hiệu điện thế giữa hai bản<br>d: khoảng cách' },
+  { ch: 'ch1', q: 'Định nghĩa điện thế tại một điểm?', a: 'Là <strong>công dịch chuyển một đơn vị điện tích dương</strong> từ vô cực về điểm đó. Đơn vị: Vôn (V)' },
+  { ch: 'ch1', q: 'Công thức công của lực điện?', a: '$$A = qU$$ <br>Công không phụ thuộc hình dạng đường đi.' },
+  { ch: 'ch1', q: 'Liên hệ E và U trong điện trường đều?', a: '$$E = \\dfrac{V_M - V_N}{MN} = \\dfrac{U_{MN}}{d}$$' },
+
+  // Chapter 2 — Tụ điện
+  { ch: 'ch2', q: 'Định nghĩa tụ điện?', a: 'Hệ gồm <strong>hai vật dẫn</strong> đặt gần nhau, ngăn cách bằng <strong>lớp cách điện</strong> (điện môi).' },
+  { ch: 'ch2', q: 'Công thức điện dung của tụ?', a: '$$C = \\dfrac{Q}{U}$$ Đơn vị: Fara (F)' },
+  { ch: 'ch2', q: 'Năng lượng tích trữ trong tụ?', a: '$$W = \\dfrac{1}{2}CU^2 = \\dfrac{Q^2}{2C} = \\dfrac{1}{2}QU$$' },
+  { ch: 'ch2', q: 'Ghép tụ NỐI TIẾP — công thức điện dung bộ?', a: '$$\\dfrac{1}{C_b} = \\dfrac{1}{C_1} + \\dfrac{1}{C_2}$$<br>Hai tụ: $C_b = \\dfrac{C_1 C_2}{C_1 + C_2}$' },
+  { ch: 'ch2', q: 'Ghép tụ SONG SONG — công thức điện dung bộ?', a: '$$C_b = C_1 + C_2$$' },
+  { ch: 'ch2', q: 'Khi tụ nối tiếp, điện tích các tụ thế nào?', a: 'Điện tích bằng nhau: $Q_b = Q_1 = Q_2$' },
+  { ch: 'ch2', q: 'Khi tụ song song, hiệu điện thế các tụ thế nào?', a: 'Hiệu điện thế bằng nhau: $U_b = U_1 = U_2$' },
+
+  // Chapter 3 — Dòng điện
+  { ch: 'ch3', q: 'Bản chất dòng điện trong kim loại?', a: 'Dòng chuyển dời có hướng của <strong>các electron tự do</strong>.' },
+  { ch: 'ch3', q: 'Công thức cường độ dòng điện?', a: '$$I = \\dfrac{\\Delta q}{\\Delta t}$$ Đơn vị: Ampe (A)' },
+  { ch: 'ch3', q: 'Liên hệ I với mật độ và tốc độ hạt mang điện?', a: '$$I = S \\cdot n \\cdot v \\cdot e$$<br>S: tiết diện, n: mật độ, v: tốc độ, e: điện tích electron' },
+  { ch: 'ch3', q: 'Định luật Ohm cho đoạn mạch?', a: '$$I = \\dfrac{U}{R}$$ I tỉ lệ thuận với U, tỉ lệ nghịch với R.' },
+  { ch: 'ch3', q: 'Điện trở dây dẫn theo kích thước?', a: '$$R = \\rho \\dfrac{l}{S}$$<br>Dây tròn: $S = \\dfrac{\\pi d^2}{4}$' },
+  { ch: 'ch3', q: 'Điện trở phụ thuộc nhiệt độ?', a: '$$R = R_0[1 + \\alpha(t - t_0)]$$' },
+  { ch: 'ch3', q: 'Ghép NỐI TIẾP điện trở?', a: '$R_{tđ} = R_1 + R_2$<br>$I = I_1 = I_2$<br>$U = U_1 + U_2$' },
+  { ch: 'ch3', q: 'Ghép SONG SONG điện trở?', a: '$\\dfrac{1}{R_{tđ}} = \\dfrac{1}{R_1} + \\dfrac{1}{R_2}$<br>Hai điện trở: $R_{tđ} = \\dfrac{R_1 R_2}{R_1 + R_2}$<br>$U = U_1 = U_2$, $I = I_1 + I_2$' },
+
+  // Chapter 4 — Mạch kín
+  { ch: 'ch4', q: 'Công thức suất điện động?', a: '$$\\mathcal{E} = \\dfrac{A}{q}$$<br>A: công lực lạ, q: điện tích dịch chuyển<br>Đơn vị: Vôn (V)' },
+  { ch: 'ch4', q: 'Định luật Ohm cho toàn mạch?', a: '$$I = \\dfrac{\\mathcal{E}}{R + r}$$<br>R: điện trở ngoài, r: điện trở trong' },
+  { ch: 'ch4', q: 'Hiệu điện thế mạch ngoài?', a: '$$U_N = \\mathcal{E} - I \\cdot r = I \\cdot R$$' },
+  { ch: 'ch4', q: 'Ghép NỐI TIẾP n nguồn giống nhau?', a: '$\\mathcal{E}_b = n\\mathcal{E}$<br>$r_b = nr$' },
+  { ch: 'ch4', q: 'Ghép SONG SONG n nguồn giống nhau?', a: '$\\mathcal{E}_b = \\mathcal{E}$<br>$r_b = \\dfrac{r}{n}$' }
+];
+
+let fcList = [...flashcards];
+let fcIdx = 0;
+const fcEl = document.getElementById('flashcard');
+const fcQ = document.getElementById('fc-q');
+const fcA = document.getElementById('fc-a');
+const fcCurr = document.getElementById('fc-current');
+const fcTotal = document.getElementById('fc-total');
+
+function renderFC() {
+  fcEl.classList.remove('flipped');
+  setTimeout(() => {
+    const card = fcList[fcIdx];
+    fcQ.innerHTML = card.q;
+    fcA.innerHTML = card.a;
+    fcCurr.textContent = fcIdx + 1;
+    fcTotal.textContent = fcList.length;
+    if (window.MathJax) MathJax.typesetPromise([fcEl]);
+  }, 200);
+}
+
+fcEl.addEventListener('click', () => fcEl.classList.toggle('flipped'));
+
+document.getElementById('fc-prev').addEventListener('click', () => {
+  fcIdx = (fcIdx - 1 + fcList.length) % fcList.length;
+  renderFC();
+});
+document.getElementById('fc-next').addEventListener('click', () => {
+  fcIdx = (fcIdx + 1) % fcList.length;
+  renderFC();
+});
+document.getElementById('fc-shuffle').addEventListener('click', () => {
+  fcList = [...fcList].sort(() => Math.random() - 0.5);
+  fcIdx = 0;
+  renderFC();
+});
+
+document.querySelectorAll('#fc-filter .fc-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#fc-filter .fc-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    fcList = f === 'all' ? [...flashcards] : flashcards.filter(c => c.ch === f);
+    fcIdx = 0;
+    renderFC();
+  });
+});
+
+renderFC();
+
+// ============== QUIZ DATA ==============
+const quizQuestions = [
+  // Chapter 1
+  { ch: 'ch1', q: 'Hai điện tích điểm $q_1, q_2$ đặt cách nhau khoảng $r$ trong chân không. Lực tương tác có biểu thức:', opts: ['$F = \\dfrac{r^2}{k|q_1 q_2|}$', '$F = r^2 \\dfrac{|q_1 q_2|}{k}$', '$F = \\dfrac{|q_1 q_2|}{kr^2}$', '$F = k\\dfrac{|q_1 q_2|}{r^2}$'], correct: 3, exp: 'Đây là công thức định luật Coulomb cơ bản.' },
+  { ch: 'ch1', q: 'Độ lớn lực tương tác giữa hai điện tích điểm trong không khí tỉ lệ:', opts: ['nghịch với bình phương khoảng cách', 'thuận với khoảng cách', 'thuận với bình phương khoảng cách', 'nghịch với khoảng cách'], correct: 0, exp: 'Lực Coulomb tỉ lệ nghịch với $r^2$.' },
+  { ch: 'ch1', q: 'Cường độ điện trường gây ra bởi điện tích $Q = 5 \\times 10^{-9}$ C tại điểm cách 10 cm có độ lớn:', opts: ['0,450 V/m', '0,225 V/m', '4500 V/m', '2250 V/m'], correct: 2, exp: '$E = k\\dfrac{|Q|}{r^2} = 9 \\times 10^9 \\times \\dfrac{5 \\times 10^{-9}}{0{,}1^2} = 4500$ V/m' },
+  { ch: 'ch1', q: 'Hai bản kim loại phẳng cách nhau 4 cm, hiệu điện thế 50 V. Cường độ điện trường giữa hai bản:', opts: ['5000 V/m', '1250 V/m', '2500 V/m', '1000 V/m'], correct: 1, exp: '$E = \\dfrac{U}{d} = \\dfrac{50}{0{,}04} = 1250$ V/m' },
+  { ch: 'ch1', q: 'Điện thế tại một điểm trong điện trường được xác định bằng:', opts: ['lực điện dịch chuyển một đơn vị điện tích dương từ vô cực về điểm đó', 'điện trường dịch chuyển một đơn vị điện tích dương', 'công dịch chuyển một đơn vị điện tích âm từ vô cực', 'công dịch chuyển một đơn vị điện tích dương từ vô cực về điểm đó'], correct: 3, exp: 'Đây là định nghĩa chuẩn của điện thế.' },
+  { ch: 'ch1', q: 'Công của lực điện tác dụng lên một điện tích:', opts: ['phụ thuộc vào hình dạng đường đi', 'không phụ thuộc vào hình dạng đường đi', 'chỉ phụ thuộc độ lớn điện tích', 'chỉ phụ thuộc cường độ điện trường'], correct: 1, exp: 'Lực điện là lực thế nên công không phụ thuộc đường đi.' },
+  { ch: 'ch1', q: 'Một điện tích $q = 2 \\times 10^{-6}$ C dịch chuyển từ A đến B trong điện trường đều, cần công $3 \\times 10^{-4}$ J. Hiệu điện thế $U_{AB}$:', opts: ['0,15 V', '1,5 V', '15 V', '150 V'], correct: 3, exp: '$U = \\dfrac{A}{q} = \\dfrac{3 \\times 10^{-4}}{2 \\times 10^{-6}} = 150$ V' },
+
+  // Chapter 2
+  { ch: 'ch2', q: 'Tụ điện là hệ gồm hai vật dẫn đặt:', opts: ['cách nhau một khoảng đủ xa', 'gần nhau và ngăn cách bằng lớp dẫn điện', 'gần nhau và ngăn cách bằng lớp cách điện', 'tiếp xúc với nhau'], correct: 2, exp: 'Định nghĩa tụ điện: hai vật dẫn ngăn cách bởi điện môi.' },
+  { ch: 'ch2', q: 'Đặt vào hai bản tụ hiệu điện thế U, điện tích Q. Điện dung được tính bằng:', opts: ['$C = QU$', '$C = U/Q$', '$C = Q^2 U$', '$C = Q/U$'], correct: 3, exp: 'Công thức cơ bản: $C = Q/U$' },
+  { ch: 'ch2', q: 'Đơn vị của điện dung trong hệ SI:', opts: ['Cu-lông (C)', 'Vôn (V)', 'Fara (F)', 'V/m'], correct: 2, exp: 'Đơn vị điện dung là Fara (F).' },
+  { ch: 'ch2', q: 'Năng lượng của tụ điện được xác định bởi:', opts: ['$W = \\dfrac{1}{2}C^2 U$', '$W = \\dfrac{1}{2}CU$', '$W = CU^2$', '$W = \\dfrac{1}{2}CU^2$'], correct: 3, exp: 'Năng lượng tụ: $W = \\dfrac{1}{2}CU^2$' },
+  { ch: 'ch2', q: 'Tụ $C = 2\\,\\mu$F tích điện ở 12 V. Năng lượng dự trữ là:', opts: ['144 J', '$1{,}44 \\times 10^{-4}$ J', '$1{,}2 \\times 10^{-5}$ J', '12 J'], correct: 1, exp: '$W = \\dfrac{1}{2}CU^2 = \\dfrac{1}{2} \\times 2 \\times 10^{-6} \\times 12^2 = 1{,}44 \\times 10^{-4}$ J' },
+  { ch: 'ch2', q: 'Hai tụ $C_1 = 1\\,\\mu$F và $C_2 = 3\\,\\mu$F mắc nối tiếp vào nguồn U = 4 V. Điện tích bộ tụ là:', opts: ['$3 \\times 10^{-7}$ C', '$3 \\times 10^{-6}$ C', '$3{,}6 \\times 10^{-7}$ C', '$3{,}6 \\times 10^{-6}$ C'], correct: 1, exp: '$C_b = \\dfrac{C_1 C_2}{C_1+C_2} = 0{,}75\\,\\mu$F → $Q = C_b U = 3 \\times 10^{-6}$ C' },
+
+  // Chapter 3
+  { ch: 'ch3', q: 'Bản chất dòng điện trong kim loại là dòng chuyển dời có hướng của:', opts: ['các ion dương', 'các electron', 'các ion âm', 'các nguyên tử'], correct: 1, exp: 'Trong kim loại, electron tự do là hạt mang điện chính.' },
+  { ch: 'ch3', q: 'Cường độ dòng điện I được xác định:', opts: ['$I = \\dfrac{\\Delta q}{\\Delta t}$', '$I = \\dfrac{\\Delta t}{\\Delta q}$', '$I = \\Delta t \\cdot \\Delta q$', '$I = \\Delta q \\cdot e$'], correct: 0, exp: 'Cường độ dòng điện = điện lượng / thời gian.' },
+  { ch: 'ch3', q: 'Trong 4 s, điện lượng qua tiết diện dây tóc bóng đèn là 2 C. Cường độ dòng điện là:', opts: ['0,5 A', '4 A', '5 A', '0,4 A'], correct: 0, exp: '$I = \\dfrac{q}{t} = \\dfrac{2}{4} = 0{,}5$ A' },
+  { ch: 'ch3', q: 'Đơn vị đo điện trở:', opts: ['ôm (Ω)', 'fara (F)', 'henry (H)', 'oát (W)'], correct: 0, exp: 'Đơn vị điện trở là Ohm (Ω).' },
+  { ch: 'ch3', q: 'Theo định luật Ohm, cường độ dòng điện qua dây dẫn tỉ lệ:', opts: ['với hiệu điện thế và điện trở của dây', 'thuận với U, không tỉ lệ với R', 'thuận với U, nghịch với R', 'nghịch với U, thuận với R'], correct: 2, exp: '$I = U/R$ — thuận với U, nghịch với R.' },
+  { ch: 'ch3', q: 'Hai điện trở $R_1 = 3\\Omega, R_2 = 6\\Omega$ mắc song song. Điện trở tương đương:', opts: ['2 Ω', '3 Ω', '6 Ω', '9 Ω'], correct: 0, exp: '$R = \\dfrac{R_1 R_2}{R_1+R_2} = \\dfrac{3 \\times 6}{9} = 2\\Omega$' },
+
+  // Chapter 4
+  { ch: 'ch4', q: 'Đơn vị của suất điện động:', opts: ['Culông (C)', 'Jun (J)', 'Vôn (V)', 'Ampe (A)'], correct: 2, exp: 'Suất điện động đo bằng Vôn (V).' },
+  { ch: 'ch4', q: 'Suất điện động của nguồn được xác định:', opts: ['$\\mathcal{E} = A/q$', '$\\mathcal{E} = q/A$', '$\\mathcal{E} = qA$', '$\\mathcal{E} = Aq^2$'], correct: 0, exp: 'Định nghĩa: $\\mathcal{E} = A/q$' },
+  { ch: 'ch4', q: 'Định luật Ohm cho mạch điện kín:', opts: ['$I = \\dfrac{\\mathcal{E}}{R+r}$', '$U_{AB} = \\mathcal{E} - Ir$', '$U_{AB} = \\mathcal{E} + Ir$', '$I = \\dfrac{R+r}{\\mathcal{E}}$'], correct: 0, exp: '$I = \\dfrac{\\mathcal{E}}{R+r}$ là định luật Ohm cho toàn mạch.' },
+  { ch: 'ch4', q: 'Hiệu điện thế mạch ngoài $U_N$ được xác định:', opts: ['$U_N = Ir$', '$U_N = I(R_N + r)$', '$U_N = \\mathcal{E} - Ir$', '$U_N = \\mathcal{E} + Ir$'], correct: 2, exp: '$U_N = \\mathcal{E} - I \\cdot r$' },
+  { ch: 'ch4', q: 'Pin 1,5 V điện trở trong 0,5 Ω nối với điện trở ngoài 2,5 Ω. Cường độ dòng điện:', opts: ['3 A', '3/5 A', '0,5 A', '2 A'], correct: 2, exp: '$I = \\dfrac{\\mathcal{E}}{R+r} = \\dfrac{1{,}5}{2{,}5+0{,}5} = 0{,}5$ A' },
+  { ch: 'ch4', q: 'Suất điện động 4 V. Công lực lạ dịch chuyển 5 mC giữa hai cực:', opts: ['1,5 mJ', '0,8 mJ', '20 mJ', '5 mJ'], correct: 2, exp: '$A = \\mathcal{E} \\cdot q = 4 \\times 5 \\times 10^{-3} = 20$ mJ' },
+  { ch: 'ch4', q: 'Mạch n nguồn giống nhau ($\\mathcal{E}, r$) mắc song song. Bộ nguồn có:', opts: ['$\\mathcal{E}_b = n\\mathcal{E}, r_b = r/n$', '$\\mathcal{E}_b = \\mathcal{E}, r_b = nr$', '$\\mathcal{E}_b = n\\mathcal{E}, r_b = nr$', '$\\mathcal{E}_b = \\mathcal{E}, r_b = r/n$'], correct: 3, exp: 'Ghép song song: SĐĐ không đổi, điện trở trong giảm n lần.' }
+];
+
+let quizMode = 'all';
+let quizSet = [];
+let quizIdx = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+document.querySelectorAll('#quiz-mode-grid .quiz-mode-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('#quiz-mode-grid .quiz-mode-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    quizMode = card.dataset.mode;
+  });
+});
+
+document.getElementById('quiz-start').addEventListener('click', startQuiz);
+
+function startQuiz() {
+  let pool = quizMode === 'all' ? [...quizQuestions] : quizQuestions.filter(q => q.ch === quizMode);
+  pool.sort(() => Math.random() - 0.5);
+  quizSet = pool.slice(0, Math.min(15, pool.length));
+  quizIdx = 0;
+  quizScore = 0;
+  document.getElementById('quiz-intro-screen').style.display = 'none';
+  document.getElementById('quiz-results-screen').style.display = 'none';
+  document.getElementById('quiz-game-screen').style.display = 'block';
+  document.getElementById('q-total').textContent = quizSet.length;
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  quizAnswered = false;
+  const q = quizSet[quizIdx];
+  document.getElementById('q-num').textContent = quizIdx + 1;
+  document.getElementById('q-correct').textContent = quizScore;
+  document.getElementById('quiz-progress-fill').style.width = `${((quizIdx) / quizSet.length) * 100}%`;
+  document.getElementById('quiz-question-text').innerHTML = q.q;
+  const optsHTML = q.opts.map((opt, i) => `
+    <button class="quiz-option" data-idx="${i}">
+      <span class="quiz-option-letter">${String.fromCharCode(65 + i)}</span>
+      <span>${opt}</span>
+    </button>
+  `).join('');
+  document.getElementById('quiz-options').innerHTML = optsHTML;
+  document.getElementById('quiz-feedback').classList.remove('show');
+  document.getElementById('quiz-next').style.display = 'none';
+
+  document.querySelectorAll('.quiz-option').forEach(btn => {
+    btn.addEventListener('click', () => handleAnswer(parseInt(btn.dataset.idx)));
+  });
+  if (window.MathJax) MathJax.typesetPromise();
+}
+
+function handleAnswer(selectedIdx) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = quizSet[quizIdx];
+  const opts = document.querySelectorAll('.quiz-option');
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add('correct');
+    else if (i === selectedIdx) btn.classList.add('incorrect');
+  });
+  const isCorrect = selectedIdx === q.correct;
+  if (isCorrect) quizScore++;
+  document.getElementById('q-correct').textContent = quizScore;
+
+  const fb = document.getElementById('quiz-feedback');
+  fb.className = 'quiz-feedback show ' + (isCorrect ? 'right' : 'wrong');
+  fb.innerHTML = `<strong>${isCorrect ? '✓ Chính xác!' : '✗ Chưa đúng.'}</strong> ${q.exp}`;
+  document.getElementById('quiz-next').style.display = 'flex';
+  if (window.MathJax) MathJax.typesetPromise([fb]);
+}
+
+document.getElementById('quiz-next').addEventListener('click', () => {
+  quizIdx++;
+  if (quizIdx >= quizSet.length) showResults();
+  else renderQuizQuestion();
+});
+
+document.getElementById('quiz-quit').addEventListener('click', () => {
+  if (confirm('Thoát và quay về màn hình chọn chủ đề?')) {
+    document.getElementById('quiz-game-screen').style.display = 'none';
+    document.getElementById('quiz-intro-screen').style.display = 'block';
+  }
+});
+
+function showResults() {
+  document.getElementById('quiz-game-screen').style.display = 'none';
+  document.getElementById('quiz-results-screen').style.display = 'block';
+  document.getElementById('quiz-final-score').textContent = `${quizScore}/${quizSet.length}`;
+  const pct = Math.round((quizScore / quizSet.length) * 100);
+  document.getElementById('stat-correct').textContent = quizScore;
+  document.getElementById('stat-wrong').textContent = quizSet.length - quizScore;
+  document.getElementById('stat-percent').textContent = pct + '%';
+  let msg = '';
+  if (pct === 100) msg = '🏆 Xuất sắc! Bạn đã thuộc bài rất tốt!';
+  else if (pct >= 80) msg = '🌟 Rất tốt! Chỉ cần ôn thêm một chút nữa thôi.';
+  else if (pct >= 60) msg = '👍 Khá rồi. Hãy ôn lại lý thuyết và thử lại nhé!';
+  else msg = '💪 Cần cố gắng hơn! Quay lại phần Lý thuyết và Flashcard nhé.';
+  document.getElementById('quiz-result-message').innerHTML = `<p style="font-family:Fraunces,serif;font-size:1.1rem;font-style:italic;color:var(--ink-soft);margin-top:1rem">${msg}</p>`;
+}
+
+document.getElementById('quiz-restart').addEventListener('click', () => {
+  document.getElementById('quiz-results-screen').style.display = 'none';
+  document.getElementById('quiz-intro-screen').style.display = 'block';
+});
+
+// ============== EXERCISES DATA ==============
+const exercises = [
+  {
+    q: 'Tại hai điểm A, B cách nhau 30 cm trong không khí có $q_1 = -6 \\times 10^{-6}$ C và $q_2 = 3 \\times 10^{-6}$ C. Xác định cường độ điện trường tại C — trung điểm AB.',
+    sol: `<p>Khoảng cách: $AC = BC = 15$ cm = 0,15 m</p>
+    <p>$E_1 = k\\dfrac{|q_1|}{AC^2} = 9 \\times 10^9 \\times \\dfrac{6 \\times 10^{-6}}{0{,}15^2} = 24 \\times 10^5$ V/m</p>
+    <p>$E_2 = k\\dfrac{|q_2|}{BC^2} = 9 \\times 10^9 \\times \\dfrac{3 \\times 10^{-6}}{0{,}15^2} = 12 \\times 10^5$ V/m</p>
+    <p>Vì $\\vec{E_1} \\uparrow\\uparrow \\vec{E_2}$ (cùng hướng từ B về A) nên:</p>
+    <p><strong>$E_C = E_1 + E_2 = 36 \\times 10^5$ V/m</strong></p>`
+  },
+  {
+    q: 'Ba tụ giống nhau $C_1 = C_2 = C_3 = 20\\,\\mu$F. Mạch: $C_1$ song song với ($C_2$ nt $C_3$). Đặt $U = 12$ V. Tính điện dung và điện tích bộ tụ.',
+    sol: `<p>$C_2$ nt $C_3$: $C_{23} = \\dfrac{C_2 C_3}{C_2 + C_3} = \\dfrac{20 \\times 20}{40} = 10\\,\\mu$F</p>
+    <p>$C_1$ // $C_{23}$: $C_b = C_1 + C_{23} = 20 + 10 = 30\\,\\mu$F</p>
+    <p>Điện tích bộ tụ: $Q_b = C_b \\cdot U = 30 \\times 10^{-6} \\times 12 = 3{,}6 \\times 10^{-4}$ C</p>
+    <p><strong>Tụ $C_1$:</strong> $U_1 = 12$ V, $Q_1 = 2{,}4 \\times 10^{-4}$ C</p>
+    <p><strong>Tụ $C_2, C_3$:</strong> $Q_2 = Q_3 = 1{,}2 \\times 10^{-4}$ C, $U_2 = U_3 = 6$ V</p>`
+  },
+  {
+    q: 'Dây dẫn kim loại tiết diện tròn, đường kính d = 2 mm, dòng điện I = 5 A. Mật độ electron $n = 8{,}45 \\times 10^{28}$ /m³. Tính tốc độ dịch chuyển có hướng của electron.',
+    sol: `<p>Tiết diện: $S = \\dfrac{\\pi d^2}{4} = \\pi \\times \\dfrac{(2 \\times 10^{-3})^2}{4} = \\pi \\times 10^{-6}$ m²</p>
+    <p>Từ $I = Snve$ ⟹ $v = \\dfrac{I}{Sne}$</p>
+    <p>$v = \\dfrac{5}{\\pi \\times 10^{-6} \\times 8{,}45 \\times 10^{28} \\times 1{,}6 \\times 10^{-19}}$</p>
+    <p><strong>$v \\approx 1{,}177 \\times 10^{-4}$ m/s</strong></p>`
+  },
+  {
+    q: 'Mạch có $R_1 = R_2 = 3\\,\\Omega$ mắc nối tiếp, $U_{AB} = 12$ V. Tính $R_{tđ}$, I, $U_1, U_2$.',
+    sol: `<p>$R_1$ nt $R_2$: $R_{tđ} = R_1 + R_2 = 3 + 3 = 6\\,\\Omega$</p>
+    <p>$I = \\dfrac{U_{AB}}{R_{tđ}} = \\dfrac{12}{6} = 2$ A — và $I_1 = I_2 = I = 2$ A</p>
+    <p>$U_1 = I_1 R_1 = 2 \\times 3 = 6$ V</p>
+    <p>$U_2 = I_2 R_2 = 2 \\times 3 = 6$ V</p>`
+  },
+  {
+    q: 'Mạch có $R_1 = R_2 = 6\\,\\Omega$ mắc song song, $U_{AB} = 12$ V. Tính $R_{tđ}$, $U_1, U_2$, $I_1, I_2$.',
+    sol: `<p>$R_1$ // $R_2$: $R_{tđ} = \\dfrac{R_1 R_2}{R_1+R_2} = \\dfrac{6 \\times 6}{12} = 3\\,\\Omega$</p>
+    <p>$U_1 = U_2 = U_{AB} = 12$ V</p>
+    <p>$I_1 = \\dfrac{U_1}{R_1} = \\dfrac{12}{6} = 2$ A</p>
+    <p>$I_2 = \\dfrac{U_2}{R_2} = \\dfrac{12}{6} = 2$ A</p>`
+  },
+  {
+    q: 'Nguồn $\\mathcal{E} = 6$ V, $r = 1\\,\\Omega$. Mạch ngoài: $R_3 = 2\\,\\Omega$ nt với ($R_1 = 3\\,\\Omega$ // $R_2 = 6\\,\\Omega$). Tính $R_{ng}$, I, $U_3$.',
+    sol: `<p>$R_{12} = \\dfrac{R_1 R_2}{R_1+R_2} = \\dfrac{3 \\times 6}{9} = 2\\,\\Omega$</p>
+    <p>$R_{ng} = R_3 + R_{12} = 2 + 2 = 4\\,\\Omega$</p>
+    <p>$I = \\dfrac{\\mathcal{E}}{R_{ng}+r} = \\dfrac{6}{4+1} = 1{,}2$ A</p>
+    <p>$I_3 = I = 1{,}2$ A (vì $R_3$ nối tiếp)</p>
+    <p><strong>$U_3 = I_3 R_3 = 1{,}2 \\times 2 = 2{,}4$ V</strong></p>`
+  }
+];
+
+const exList = document.getElementById('exercises-list');
+exList.innerHTML = exercises.map((ex, i) => `
+  <div class="exercise-card">
+    <span class="exercise-num">BÀI ${i + 1}</span>
+    <div class="exercise-question">${ex.q}</div>
+    <button class="exercise-toggle" data-idx="${i}">Xem lời giải ▾</button>
+    <div class="exercise-solution" id="sol-${i}">
+      <h4>Lời giải</h4>
+      ${ex.sol}
+    </div>
+  </div>
+`).join('');
+
+document.querySelectorAll('.exercise-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const idx = btn.dataset.idx;
+    const sol = document.getElementById(`sol-${idx}`);
+    sol.classList.toggle('show');
+    btn.textContent = sol.classList.contains('show') ? 'Ẩn lời giải ▴' : 'Xem lời giải ▾';
+    if (window.MathJax) MathJax.typesetPromise([sol]);
+  });
+});
+
+// Wait for MathJax then render all
+window.addEventListener('load', () => {
+  setTimeout(() => { if (window.MathJax) MathJax.typesetPromise(); }, 500);
+});
+</script>
+
+</body>
+</html>
